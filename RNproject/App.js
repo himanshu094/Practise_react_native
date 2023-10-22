@@ -3,12 +3,14 @@ import { useState } from 'react';
 
 export default function App() {
   const [enteredGoal,setEnteredGoal]=useState('')
+  const [goalList,setGoalList] = useState([])
+
   function goalInputHandler(enteredText){
    // console.log(enteredText);
    setEnteredGoal(enteredText)
   }
   function addGoalHandler(){
-    console.log(enteredGoal);
+    setGoalList((lastGoals)=>[...lastGoals, enteredGoal])
   }
   return (
     <View style={styles.appContainer}>
@@ -19,7 +21,11 @@ export default function App() {
       </View>
 
       <View style={styles.goalsContainer}>
-        <Text>List of goals...</Text>
+        {
+        goalList.map((goal,i)=>{
+         return <Text key={i}>{goal}</Text>
+        })
+        }
       </View>
 
     </View>
